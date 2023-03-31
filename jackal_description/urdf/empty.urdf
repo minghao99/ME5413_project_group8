@@ -1,0 +1,7 @@
+<robot>
+  <!-- This file is an example that can be included from jackal.urdf.xacro
+       by setting the JACKAL_URDF_EXTRAS environment variable to the full
+       path of this file. -->
+
+</robot>
+
