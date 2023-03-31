@@ -51,6 +51,9 @@ cd src
 git clone https://github.com/<YOUR_GITHUB_USERNAME>/ME5413_project_group8.git
 cd ..
 
+# Install ros navigation stack
+sudo apt-get install ros-noetic-navigation
+
 # Install all dependencies
 rosdep install --from-paths src --ignore-src -r -y
 
@@ -59,8 +62,6 @@ catkin_make
 # Source 
 source devel/setup.bash
 ```
-# Install ros navigation stack
-sudo apt-get install ros-noetic-navigation
 
 To properly load the gazebo world, you will need to have the necessary model files in the `~/.gazebo/models/` directory.
 
