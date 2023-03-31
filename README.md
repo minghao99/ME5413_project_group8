@@ -91,9 +91,9 @@ There are two sources of models needed:
 ## Usage
 
 2D navigation
-
+```bash
 cd <YOUR_OWN_WORKSPACE>
 source devel/setup.bash
 roslaunch me5413_world navigation.launch
-
+```
 click the targets on right bottm panal in rviz to publish goal, or simply use publish 2d goal in provided in rviz.
