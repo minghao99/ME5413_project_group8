@@ -85,7 +85,7 @@ There are two sources of models needed:
 
   ```bash
   # Copy the customized models into the `~/.gazebo/models` directory
-  cp -r ~/<YOUR_OWN_WORKSPACE>/src/me5413_world/models/* ~/.gazebo/models
+  cp -r ~/<YOUR_OWN_WORKSPACE>/src/ME5413_project_group8/me5413_world/models/* ~/.gazebo/models
   ```
 
 ## Usage
