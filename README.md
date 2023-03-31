@@ -9,8 +9,6 @@ NUS ME5413 Autonomous Mobile Robotics Final Project
 ![GitHub Repo stars](https://img.shields.io/github/stars/NUS-Advanced-Robotics-Centre/ME5413_Final_Project?color=FFE333)
 ![GitHub Repo forks](https://img.shields.io/github/forks/NUS-Advanced-Robotics-Centre/ME5413_Final_Project?color=FFE333)
 
-![cover_image](src/me5413_world/media/gazebo_world.jpg)
-
 ## Dependencies
 
 * System Requirements:
@@ -46,15 +44,12 @@ This repo is a ros workspace, containing three rospkgs:
 * `jackal_description` contains the modified jackal robot model descriptions
 * `me5413_world` the main pkg containing the gazebo world, and the launch files
 
-**Note:** If you are working on this project, it is encouraged to fork this repository and work on your own fork!
-
-After forking this repo to your own github:
-
 ```bash
 # Clone your own fork of this repo (assuming home here `~/`)
-cd
-git clone https://github.com/<YOUR_GITHUB_USERNAME>/ME5413_Final_Project.git
-cd ME5413_Final_Project
+cd <YOUR_OWN_WORKSPACE>
+cd src
+git clone https://github.com/<YOUR_GITHUB_USERNAME>/ME5413_project_group8.git
+cd ..
 
 # Install all dependencies
 rosdep install --from-paths src --ignore-src -r -y
@@ -87,103 +82,15 @@ There are two sources of models needed:
 
   ```bash
   # Copy the customized models into the `~/.gazebo/models` directory
-  cp -r ~/ME5413_Final_Project/src/me5413_world/models/* ~/.gazebo/models
+  cp -r ~/<YOUR_OWN_WORKSPACE>/src/me5413_world/models/* ~/.gazebo/models
   ```
 
 ## Usage
 
-### 0. Gazebo World
+2D navigation
 
-This command will launch the gazebo with the project world
-
-```bash
-# Launch Gazebo World together with our robot
-roslaunch me5413_world world.launch
-```
-
-### 1. Manual Control
-
-If you wish to explore the gazebo world a bit, we provide you a way to manually control the robot around:
-
-```bash
-# Only launch the robot keyboard teleop control
-roslaunch me5413_world manual.launch
-```
-
-**Note:** This robot keyboard teleop control is also included in all other launch files, so you don't need to launch this when you do mapping or navigation.
-
-![rviz_manual_image](src/me5413_world/media/rviz_manual.png)
-
-### 2. Mapping
-
-After launching **Step 0**, in the second terminal:
-
-```bash
-# Launch GMapping
-roslaunch me5413_world mapping.launch
-```
-
-After finishing mapping, run the following command in the thrid terminal to save the map:
-
-```bash
-# Save the map as `my_map` in the `maps/` folder
-roscd me5413_world/maps/
-rosrun map_server map_saver -f my_map map:=/map
-```
-
-![rviz_nmapping_image](src/me5413_world/media/rviz_mapping.png)
-
-### 3. Navigation
-
-Once completed **Step 2** mapping and saved your map, quit the mapping process.
-
-Then, in the second terminal:
-
-```bash
-# Load a map and launch AMCL localizer
+cd <YOUR_OWN_WORKSPACE>
+source devel/setup.bash
 roslaunch me5413_world navigation.launch
-```
 
-![rviz_navigation_image](src/me5413_world/media/rviz_navigation.png)
-
-## Student Tasks
-
-### 1. Map the environment
-
-* You may use any SLAM algorithm you like, any type:
-  * 2D LiDAR
-  * 3D LiDAR
-  * Vision
-  * Multi-sensor
-* Verify your SLAM accuracy by comparing your odometry with the published `/gazebo/ground_truth/state` topic (`nav_msgs::Odometry`), which contains the gournd truth odometry of the robot.
-* You may want to use tools like [EVO](https://github.com/MichaelGrupp/evo) to quantitatively evaluate the performance of your SLAM algorithm.
-
-### 2. Using your own map, navigate your robot
-
-* From the starting point, move to the given pose within each area in sequence
-  * Assembly Line 1, 2
-  * Packaging Area 1, 2, 3, 4
-  * Delivery Vehicle 1, 2, 3
-* We have provided you a GUI in RVIZ that allows you to click and publish these given goal poses to the `/move_base_simple/goal` topic:
-  
-  ![rviz_panel_image](src/me5413_world/media/rviz_panel.png)
-
-* We also provides you four topics (and visualized in RVIZ) that computes the real-time pose error between your robot and the selelcted goal pose:
-  * `/me5413_world/absolute/heading_error` (in degrees, wrt `world` frame, `std_msgs::Float32`)
-  * `/me5413_world/absolute/position_error` (in meters, wrt `world` frame, `std_msgs::Float32`)
-  * `/me5413_world/relative/heading_error` (in degrees, wrt `map` frame, `std_msgs::Float32`)
-  * `/me5413_world/relative/position_error` (in meters wrt `map` frame, `std_msgs::Float32`)
-
-## Contribution
-
-You are welcome contributing to this repo by opening a pull-request
-
-We are following:
-
-* [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html),
-* [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#main),
-* [ROS C++ Style Guide](http://wiki.ros.org/CppStyleGuide)
-
-## License
-
-The [ME5413_Final_Project](https://github.com/NUS-Advanced-Robotics-Centre/ME5413_Final_Project) is released under the [MIT License](https://github.com/NUS-Advanced-Robotics-Centre/ME5413_Final_Project/blob/main/LICENSE)
+click the targets on right bottm panal in rviz to publish goal, or simply use publish 2d goal in provided in rviz.
